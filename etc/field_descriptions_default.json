@@ -1,0 +1,7 @@
+[
+{"datatype":"time","type":"integer","field":"volume","unique":true},
+{"datatype":"categorical","type":"integer","field":"page","unique":true},
+{"field":"issuepage","type":"integer","datatype":"categorical","unique":true},
+{"field":"searchstring","type":"character","datatype":"etc","unique":true}
+]		
+

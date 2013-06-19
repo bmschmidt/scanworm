@@ -2,18 +2,17 @@
 
 variable=Printers
 #Clone the github repo
-git clone git@github.com:bmschmidt/Presidio.git
+#git clone git@github.com:bmschmidt/Presidio.git
 
 mkdir -p Presidio/files
 mkdir -p Presidio/files/metadata
 mkdir -p Presidio/files/texts
 
-ln -s texts Presidio/files/raw
+ln -s `pwd`/texts Presidio/files/texts/raw
 
-R CMD BATCH updateMetadata.R
-
-mv /tmp/jsoncatalog.txt Presidio/metadata
-cp field_descriptions.json Presidio/metadata
+#R CMD BATCH updateMetadata.R
+cp /tmp/jsoncatalog.txt Presidio/files/metadata
+cp etc/field_descriptions_default.json Presidio/files/metadata/field_descriptions.json
 
 cd Presidio
 

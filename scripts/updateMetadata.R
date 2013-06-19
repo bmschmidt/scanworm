@@ -22,13 +22,14 @@ pageNumbers = function(dir = "/home/bschmidt/Printers/texts") {
   firstlines = firstlines[firstlines$impliedStart > 0 & firstlines$word < 300,]
 summary(output$volume)
   output=output[!is.na(output$volume),]
+  require(ggplot2)
   ggplot(firstlines[firstlines$volume==sample(firstlines$volume,1),]) + geom_point(aes(y=page,x=impliedStart))
-  firstlines$
+  require(rpart)
+  
   volumePages = ddply(firstlines,.(volume),function(volume) {
     pagesInVolume=max(
       output$page[output$volume==volume$volume[1]],na.rm=T
     )
-    require(MASS)
     starts = table(volume$impliedStart)
     starts = starts[starts > 5]
     volume = volume[volume$impliedStart %in% names(starts),]
@@ -41,8 +42,9 @@ summary(output$volume)
     })
   
   output=merge(volumePages,output)
-  output$filename = as.character(output$filename)
+  output$filename = gsub(".txt","",as.character(output$filename))
   require(rjson)
+  require(plyr)
   cat("",file="/tmp/jsoncatalog.txt")
   d_ply(output,.(volume,page), function(row) {
     row$searchstring=paste0("Volume ",row$volume,", page ",row$page,

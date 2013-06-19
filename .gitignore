@@ -5,3 +5,6 @@ models
 Presidio
 
 *~
+*.Rout
+*.RData
+*.Rdata
